@@ -23,7 +23,7 @@ export default async function Home() {
     <div>
       <div className=" container mx-auto">
          <div>
-            <div className=" mt-3 pb-10 flex min-h-[160px] items-center justify-between overflow-hidden rounded-2xl border border-gray-200 bg-[#f8fbf8] px-5 py-4">
+            <div className=" mt-3 pb-10 flex min-h-[160px] h-auto flex-col-reverse md:flex-row items-center justify-between overflow-hidden rounded-2xl border border-gray-200 bg-[#f8fbf8] px-5 py-4">
               {/* Left Content */}
               <div className="max-w-[75%]">
                 <span className="inline-block rounded-full bg-[#e0f4e8] px-3 py-1 text-xs font-medium text-green-700">
@@ -47,7 +47,7 @@ export default async function Home() {
               </div>
             
               {/* Right Image */}
-              <div className="hidden w-32 shrink-0 sm:block md:w-40">
+              <div className=" h-full w-32 shrink-0 sm:block md:w-40">
                  <Image src={BanerImage} alt="সবজির ঝুড়ি" className="h-auto w-full object-contain"/>
               </div>
             </div>

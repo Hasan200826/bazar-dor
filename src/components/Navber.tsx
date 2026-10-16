@@ -1,37 +1,24 @@
+
 import Image from 'next/image';
 import React from 'react';
 import navIcon from '@/assets/logo-icon.png'
 import Link from 'next/link';
-import { defaultOverrides } from 'next/dist/server/require-hook';
-import Marquee from 'react-fast-marquee';
-import MarqueeBox from './MarqueeBox';
-const Navber =async () => {
-  const leftSideItems = <>
-     <button className=' btn capitalize'>sign in</button>
-     <button className=' btn capitalize bg-green-800 text-white'>sign up</button>
-  </>
-  const res =await fetch('https://openapi.programming-hero.com/api/bazardor/categories',
-    {
-      cache: "force-cache",
-    }
-  )
-  const navItems =await res.json()
-  const resAllProduct = await fetch('https://openapi.programming-hero.com/api/bazardor/products',
-    {
-      cache:'force-cache'
-    }
-  )
-  const allProduct =await resAllProduct.json()
-  
+import MarqueeDiv from './MarqueeDiv';
+import NavItems from './NavItems';
+import NavRightSide from './NavRightSide';
+
+
+const Navber = () => {
   return (
     <div>
-      <div className=' container mx-auto shadow-2xl h-[90px] w-full p-3'>
+      <div className=' container mx-auto shadow-2xl rounded-b-2xl h-[90px] w-full p-3'>
          <div className=' h-[8/10] flex justify-between items-center mb-3'>
            {/* laft sive */}
-           <div className=' h-full flex gap-3'>
+           <Link href={'/'}>
+              <div className=' h-full flex gap-3'>
               {/* image er jonnno */}
               <div className=' h-full bg-green-800 p-3 flex items-center justify-center rounded-[10px]'>
-                <Image src={navIcon} height={32} width={32} className=' h-full w-full object-cover' alt=' bajardor'/>
+                <Image src={navIcon} height={42} width={42} className=' h-full w-full object-cover' alt=' bajardor'/>
               </div>
               {/* heading er jonno */}
               <div>
@@ -43,24 +30,18 @@ const Navber =async () => {
                  </p>
                </div>
            </div>
+           </Link>
+          
            {/* right side */}
-           <div className=' flex gap-3'>
-             {leftSideItems}
+           <div>
+             <NavRightSide/>
            </div>
          </div>
-         <div className=' flex gap-3 h-[2/10]'>
-           {
-             navItems.map((items)=><Link href={'/'} key={items.id}>
-               <p className=' flex gap-2 text-[12px]' >{items.icon} {items.nameBn}</p>
-               </Link> )
-           }
+         <div>
+           <NavItems/>
          </div>
        </div>
-       <Marquee className=" py-2">
-         {
-          allProduct.map((product)=><Link href={`/category/${product.id}`} key={product.id}><MarqueeBox product={product}/></Link> )
-          }
-      </Marquee>
+       <MarqueeDiv/>
     </div>
 
     

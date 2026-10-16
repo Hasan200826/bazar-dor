@@ -2,18 +2,6 @@ import React from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 export const instant = false;
 
-const prices = [
-  { market: "ঢাকা", type: "খুচরা", price: "৪৫ টাকা", previous: "৪২ টাকা" },
-  { market: "চট্টগ্রাম", type: "খুচরা", price: "৪৮ টাকা", previous: "৪৫ টাকা" },
-  { market: "রাজশাহী", type: "খুচরা", price: "৪৩ টাকা", previous: "৪০ টাকা" },
-  { market: "খুলনা", type: "খুচরা", price: "৪৬ টাকা", previous: "৪৩ টাকা" },
-  { market: "সিলেট", type: "খুচরা", price: "৫০ টাকা", previous: "৪৭ টাকা" },
-  { market: "বরিশাল", type: "খুচরা", price: "৪৪ টাকা", previous: "৪১ টাকা" },
-  { market: "রংপুর", type: "খুচরা", price: "৪২ টাকা", previous: "৪০ টাকা" },
-  { market: "ময়মনসিংহ", type: "খুচরা", price: "৪৫ টাকা", previous: "৪২ টাকা" },
-  { market: "কুমিল্লা", type: "খুচরা", price: "৪৭ টাকা", previous: "৪৪ টাকা" },
-  { market: "বগুড়া", type: "খুচরা", price: "৪১ টাকা", previous: "৩৯ টাকা" },
-];
 const productPage =async ({params}) =>{
        
   const { id } = await params;
@@ -24,8 +12,12 @@ const productPage =async ({params}) =>{
   if (!res.ok) {
     throw new Error("Product fetch failed");
   }
-
+  
+  
   const product = await res.json();
+  const min = product.markets.sort((a,b)=>a.min-b.min)[0].min;
+  const max=product.markets.sort((a,b)=>b.min-a.min)[0].max;
+  
   return (
     <div className=' container mx-auto'>
      <main className="min-h-screen bg-[#f0f5f0] px-3 py-5 text-gray-800 sm:px-6">
@@ -38,7 +30,7 @@ const productPage =async ({params}) =>{
           <span>/</span>
           <span className="text-green-700">পণ্যের বিস্তারিত</span>
         </div>
-
+        
         {/* Product Header */}
         <section className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-gray-100 bg-white p-4">
           <div className="flex items-center gap-3">
@@ -92,7 +84,7 @@ const productPage =async ({params}) =>{
             <div className="rounded-lg border border-gray-200 p-3">
               <p className="text-xs text-gray-500">সর্বনিম্ন দাম</p>
               <p className="mt-2 text-sm font-bold text-green-600">
-                ৪১ টাকা
+                {min}
               </p>
               <p className="mt-1 text-xs text-gray-500">
                 প্রতি কেজি
@@ -102,7 +94,7 @@ const productPage =async ({params}) =>{
             <div className="rounded-lg border border-gray-200 p-3">
               <p className="text-xs text-gray-500">সর্বোচ্চ দাম</p>
               <p className="mt-2 text-sm font-bold text-red-500">
-                ৫০ টাকা
+                {max}
               </p>
               <p className="mt-1 text-xs text-gray-500">
                 প্রতি কেজি
@@ -112,7 +104,7 @@ const productPage =async ({params}) =>{
             <div className="rounded-lg border border-gray-200 p-3">
               <p className="text-xs text-gray-500">গড় দাম</p>
               <p className="mt-2 text-sm font-bold text-green-600">
-                ৪৫ টাকা
+                {min+max/2}
               </p>
               <p className="mt-1 text-xs text-gray-500">
                 প্রতি কেজি
