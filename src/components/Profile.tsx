@@ -12,7 +12,6 @@ const Profile = () => {
     await authClient.signOut();
     window.location.href='/sign-in'
   };
-
   return (
     <div className="flex justify-between items-center">
       <div className="flex gap-4">

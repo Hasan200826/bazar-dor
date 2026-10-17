@@ -22,12 +22,9 @@ const Page = async ({ params }: Props) => {
   const products = await res.json();
   const sortProduct =[...products]
   console.log(sortProduct);
-  function handleSelection(e) {
-    console.log(e.targed.vlue);
-    
-    
-  }
   const categoryInfo = products?.[0];
+  console.log('categoryInfo',categoryInfo);
+  
 
   return (
     <main className="min-h-screen bg-[#f0f5f1] px-4 py-5 text-gray-800 sm:px-6">

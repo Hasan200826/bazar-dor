@@ -1,6 +1,7 @@
+import { Product } from '@/app/types/product';
 import React from 'react';
 
-const PriceUpProductCard = ({product}) => {
+const PriceUpProductCard = ({product}:{product:Product}) => {
   return (
     <div className=' hover:border border-green-400 rounded-[7px]'>
                       <div className="w-full  rounded-md border border-gray-200 bg-white p-3 shadow-sm">

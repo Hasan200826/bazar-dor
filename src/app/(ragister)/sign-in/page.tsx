@@ -7,7 +7,7 @@ import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Bounce, toast } from 'react-toastify';
 
 const page = () => {
-  const onSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit =async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data= Object.fromEntries(formData.entries())

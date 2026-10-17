@@ -1,19 +1,25 @@
 "use client"
 
-import { authClient } from '@/lib/auth-client';
+import { Datas } from '@/app/contextApi/DataProvider';
+import { authClient, useSession } from '@/lib/auth-client';
 import { Form } from '@heroui/react';
-import React from 'react';
+import { refresh } from 'next/cache';
+import React, { useContext } from 'react';
 
-const UpgratProfilePage = () => {
-  const handleUpgradUser=async(e)=>{
+const UpgratProfilePage =() =>{
+  const{data:session}=useSession()
+  const handleUpgradUser=async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
     const formData = new FormData(e.currentTarget)
     const data = Object.fromEntries(formData.entries())
-    await authClient.updateUser({
-    name:data.name as string,
-})
-   
+    if(data.name !==''){
+      await authClient.updateUser({
+      name:data.name as string,
+      })
+    }
+    
   }
+  console.log(session?.user.name);
   return (
     <div>
       <Form className=' flex flex-col gap-3' onClick={handleUpgradUser}>

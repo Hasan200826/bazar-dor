@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 
 const NavItems =async () => {
@@ -7,11 +8,11 @@ const NavItems =async () => {
     }
   )
    const navItems =await res.json()
-  console.log(navItems);
+  console.log('nav',navItems);
   return (
     <div className='flex gap-3 h-[2/10]'>
       {
-             navItems.map((items)=><Link href={`/products/${items.slug}`} key={items.id}>
+             navItems.map((items:{id:string, slug:string, nameBn:string, icon: string})=><Link href={`/products/${items.slug}`} key={items.id}>
                <p className=' flex gap-2 text-[12px]' >{items.icon} {items.nameBn}</p>
                </Link> )
            }

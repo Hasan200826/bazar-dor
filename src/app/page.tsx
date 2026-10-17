@@ -6,6 +6,7 @@ import BanerImage from '@/assets/bazar-hero.png'
 import BanglaDate from "@/components/BangladeshTime";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import PriceUpProductCard from "@/components/PriceUpProductCard";
+import { Product } from "./types/product";
 export default async function Home() {
   const resAllProduct = await fetch('https://openapi.programming-hero.com/api/bazardor/products',
     {
@@ -13,11 +14,11 @@ export default async function Home() {
     }
   )
   const allProduct =await resAllProduct.json()
-  const priceRiseProduct = allProduct.filter((product)=>product.change.dir === 'up')
+  const priceRiseProduct = allProduct.filter((product:Product)=>product.change.dir === 'up')
   console.log(priceRiseProduct);
   const fastSixRiseProdect = priceRiseProduct.slice(0,6)
   console.log(fastSixRiseProdect);
-  const pricrFallProduct =  allProduct.filter((product)=>product.change.dir === 'down')
+  const pricrFallProduct =  allProduct.filter((product:Product)=>product.change.dir === 'down')
   const fastSixDownProdect =pricrFallProduct.slice(0,6)
   return (
     <div>
@@ -58,7 +59,7 @@ export default async function Home() {
             <div className=" grid grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 gap-5 mx-auto">
            
              {
-             fastSixRiseProdect.map((product)=><Link href={`/category/${product.id}`} key={product.id}><PriceUpProductCard product ={product}/></Link>)
+             fastSixRiseProdect.map((product:Product)=><Link href={`/category/${product.id}`} key={product.id}><PriceUpProductCard product ={product}/></Link>)
              }
             </div>
          </div>
@@ -68,7 +69,7 @@ export default async function Home() {
            <div className=" grid grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 gap-5 mx-auto">
            
              {
-             fastSixDownProdect.map((product)=><Link href={`/category/${product.id}`} key={product.id}><PriceUpProductCard product ={product}/></Link>)
+             fastSixDownProdect.map((product:Product)=><Link href={`/category/${product.id}`} key={product.id}><PriceUpProductCard product ={product}/></Link>)
              }
             </div>
          </div>
@@ -78,7 +79,7 @@ export default async function Home() {
            <div className=" grid grid-cols-1 md:grid-cols-2 mt-10 lg:grid-cols-3 gap-5 mx-auto">
            
              {
-             allProduct.map((product)=><Link href={`/category/${product.id}`} key={product.id}><PriceUpProductCard product ={product}/></Link>)
+             allProduct.map((product:Product)=><Link href={`/category/${product.id}`} key={product.id}><PriceUpProductCard product ={product}/></Link>)
              }
             </div>
          </div>

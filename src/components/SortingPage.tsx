@@ -4,9 +4,14 @@
 import { useState } from 'react';
 import PriceUpProductCard from './PriceUpProductCard';
 import Link from 'next/link';
+import { Product } from '@/app/types/product';
+ type SortProductpromps={
+  categoryInfo:Product,
+  products:Product[],
+ }
 
-const SortingPage = ({categoryInfo,products}) => {
-  let [sortProduct ,setSortProduct]=useState([...products])
+const SortingPage = ({categoryInfo,products}:SortProductpromps) => {
+  const[sortProduct ,setSortProduct]=useState<Product[]>([...products])
   console.log(sortProduct);
  const handleSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
   const value = e.target.value;
@@ -46,7 +51,7 @@ const SortingPage = ({categoryInfo,products}) => {
         {/* Products */}
         {sortProduct?.length > 0 ? (
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {sortProduct.map((product: { id: string | number }) => (
+            {sortProduct.map((product:Product) => (
               <Link href={`/category/${product.id}`} key={product.id}>
                 <PriceUpProductCard
                 

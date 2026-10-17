@@ -1,12 +1,20 @@
+import { Product,Market } from '@/app/types/product';
 import React from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 export const instant = false;
 
-const productPage =async ({params}) =>{
+type Props = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+
+const productPage =async ({params}:Props) =>{
        
-  const { id } = await params;
+  const { slug } = await params;
    const res = await fetch(
-    `https://api.api-store.workers.dev/api/bazardor/products/${id}`
+    `https://api.api-store.workers.dev/api/bazardor/products/${slug}`
   );
 
   if (!res.ok) {
@@ -15,8 +23,8 @@ const productPage =async ({params}) =>{
   
   
   const product = await res.json();
-  const min = product.markets.sort((a,b)=>a.min-b.min)[0].min;
-  const max=product.markets.sort((a,b)=>b.min-a.min)[0].max;
+  const min = product.markets.sort((a:Market,b:Market)=>a.min-b.min)[0].min;
+  const max=product.markets.sort((a:Market,b:Market)=>b.min-a.min)[0].max;
   
   return (
     <div className=' container mx-auto'>
@@ -134,7 +142,7 @@ const productPage =async ({params}) =>{
               </thead>
 
               <tbody>
-                {product.markets.map((item, index) => (
+                {product.markets.map((item:Market, index:number) => (
                   <tr
                     key={item.market}
                     className={`border-b border-gray-200 ${

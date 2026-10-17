@@ -4,6 +4,7 @@ import "./globals.css";
 import Navber from "@/components/Navber";
 import Footer from "@/components/Footer";
 import { Suspense } from "react";
+import DataProvider from "./contextApi/DataProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,11 +29,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="light"
     >
       <body className="min-h-full flex flex-col">
-           <Navber/>
-        <main>
-          {children}
-        </main>
-        <Footer/>
+        <DataProvider>
+          <Navber/>
+           <main>
+             {children}
+           </main>
+           <Footer/>
+        </DataProvider>
+           
         </body>
     </html>
   );

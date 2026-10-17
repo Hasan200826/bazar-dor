@@ -1,9 +1,6 @@
 
 import Profile from '@/components/Profile';
 import UpgratProfilePage from '@/components/UpgratProfilePage';
-import { Form } from '@heroui/react';
-import { signOut } from 'better-auth/api';
-import Image from 'next/image';
 import React from 'react';
 
 const page =async () => {

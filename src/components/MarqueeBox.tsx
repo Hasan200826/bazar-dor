@@ -1,7 +1,8 @@
+import { Product } from '@/app/types/product';
 import React from 'react';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 
-const MarqueeBox = ({product}) => {
+const MarqueeBox = ({product}:{product:Product}) => {
   return (
     <div className=' mx-3 flex items-center gap-1 text-[10px]'>
        <p>{product.categoryIcon}</p>
